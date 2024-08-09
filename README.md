@@ -28,3 +28,4 @@ CREATE TABLE `movie_subject`
 - 删除
 - 重命名
 - 恢复默认排序
+- 查主题明细
