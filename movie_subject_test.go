@@ -24,9 +24,9 @@ func TestMain(m *testing.M) {
 
 func TestInit(t *testing.T) {
 	err := movieSubject.Init([]moviesubject.SubjectInit{{
-		Code:     "4026601",
-		Name:     "英国历史",
-		Category: moviesubject.DouList,
+		SubjectId: "4026601",
+		Name:      "英国历史",
+		Category:  moviesubject.DouList,
 	}}, true)
 	if err != nil {
 		t.Errorf("初始化失败: %v", err)
@@ -50,10 +50,10 @@ func TestOrder(t *testing.T) {
 
 func TestAdd(t *testing.T) {
 	err := movieSubject.Add(moviesubject.SubjectAdd{
-		Code:     "4026601",
-		Name:     "英国历史",
-		Category: moviesubject.DouList,
-		Order:    6,
+		SubjectIdOrUrl: "https://www.douban.com/doulist/4026601",
+		Name:           "英国历史",
+		Category:       moviesubject.DouList,
+		Order:          6,
 	})
 	if err != nil {
 		t.Error(err)
@@ -79,4 +79,12 @@ func TestResetOrder(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+}
+
+func TestItems(t *testing.T) {
+	r, err := movieSubject.ItemsWith("4026601", moviesubject.DouList, 0, 10)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Logf("电影列表: %v", r)
 }

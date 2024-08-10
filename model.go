@@ -3,7 +3,7 @@ package moviesubject
 type (
 	Subject struct {
 		Id           int64  `gorm:"primaryKey;autoIncrement;column:id" json:"id"` // 主键
-		Code         string `gorm:"column:code" json:"code"`                      // 编码
+		SubjectId    string `gorm:"column:subject_id" json:"subjectId"`           // 豆列或者片单的 id
 		Name         string `gorm:"column:name" json:"name"`                      // 名称
 		Category     string `gorm:"column:category" json:"category"`              // 类别
 		IsDefault    bool   `gorm:"column:is_default" json:"isDefault"`           // 是否默认

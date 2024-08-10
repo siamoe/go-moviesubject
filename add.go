@@ -1,10 +1,18 @@
 package moviesubject
 
-import "fmt"
+import (
+	"fmt"
+	"net/url"
+	"path"
+)
 
 func (s *MovieSubject) Add(subject SubjectAdd) error {
-	err := s.db.Model(&Subject{}).Create(&Subject{
-		Code:         subject.Code,
+	URL, err := url.Parse(subject.SubjectIdOrUrl)
+	if err == nil {
+		subject.SubjectIdOrUrl = path.Base(URL.Path)
+	}
+	err = s.db.Model(&Subject{}).Create(&Subject{
+		SubjectId:    subject.SubjectIdOrUrl,
 		Name:         subject.Name,
 		Category:     string(subject.Category),
 		IsDefault:    false,

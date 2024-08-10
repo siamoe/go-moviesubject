@@ -20,7 +20,7 @@ func (s *MovieSubject) Init(inits []SubjectInit, reset bool) error {
 		var subjects []Subject
 		for i, init := range inits {
 			subjects = append(subjects, Subject{
-				Code:         init.Code,
+				SubjectId:    init.SubjectId,
 				Name:         init.Name,
 				Category:     string(init.Category),
 				IsDefault:    true,

@@ -10,7 +10,7 @@
 CREATE TABLE `movie_subject`
 (
     `id`            bigint                                  NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `code`          varchar(255) COLLATE utf8mb4_general_ci NOT NULL COMMENT '编码',
+    `subject_id`    varchar(255) COLLATE utf8mb4_general_ci NOT NULL COMMENT '豆列或者片单的 id',
     `name`          varchar(255) COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
     `category`      varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '分类',
     `is_default`    tinyint(1) NOT NULL COMMENT '默认的',
