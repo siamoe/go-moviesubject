@@ -8,11 +8,35 @@ type (
 		Name      string   `json:"name"`      // 名称
 		Category  Category `json:"category"`  // 类别
 	}
-	SubjectAdd struct {
+)
+
+type (
+	InitRequest struct {
+		Subjects []SubjectInit `json:"subjects"` // 主题列表
+		Reset    bool          `json:"reset"`    // 是否重置
+	}
+	OrderRequest struct {
+		Ids []int64 `json:"ids"` // 主题 id 列表
+	}
+	AddRequest struct {
 		SubjectIdOrUrl string   `json:"subjectIdOrUrl"` // 豆列或者片单的 id 或者 url
 		Name           string   `json:"name"`           // 名称
 		Category       Category `json:"category"`       // 类别
 		Order          int      `json:"order"`          // 显示顺序
+	}
+	DeleteRequest struct {
+		Id int64 `json:"id"`
+	}
+	RenameRequest struct {
+		Id   int64  `json:"id"`   // 主题 id
+		Name string `json:"name"` // 名称
+	}
+	ItemsRequest struct {
+		Id        *int64   `json:"id,optional"`        // 主题 id
+		SubjectId *string  `json:"subjectId,optional"` // 豆列或者片单的 id，与 id 二选一
+		Category  Category `json:"category"`           // 类别
+		PageIndex int      `json:"pageIndex"`          // 页码
+		PageSize  int      `json:"pageSize"`           // 每页大小
 	}
 )
 

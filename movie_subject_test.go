@@ -23,11 +23,11 @@ func TestMain(m *testing.M) {
 }
 
 func TestInit(t *testing.T) {
-	err := movieSubject.Init([]moviesubject.SubjectInit{{
+	err := movieSubject.Init(moviesubject.InitRequest{Subjects: []moviesubject.SubjectInit{{
 		SubjectId: "4026601",
 		Name:      "英国历史",
 		Category:  moviesubject.DouList,
-	}}, true)
+	}}, Reset: true})
 	if err != nil {
 		t.Errorf("初始化失败: %v", err)
 	}
@@ -42,14 +42,14 @@ func TestList(t *testing.T) {
 }
 
 func TestOrder(t *testing.T) {
-	err := movieSubject.Order([]int64{1, 2, 3, 4, 5})
+	err := movieSubject.Order(moviesubject.OrderRequest{Ids: []int64{1, 2, 3, 4, 5}})
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestAdd(t *testing.T) {
-	err := movieSubject.Add(moviesubject.SubjectAdd{
+	err := movieSubject.Add(moviesubject.AddRequest{
 		SubjectIdOrUrl: "https://www.douban.com/doulist/4026601",
 		Name:           "英国历史",
 		Category:       moviesubject.DouList,
@@ -61,14 +61,14 @@ func TestAdd(t *testing.T) {
 }
 
 func TestDelete(t *testing.T) {
-	err := movieSubject.Delete(4)
+	err := movieSubject.Delete(moviesubject.DeleteRequest{Id: 4})
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestRename(t *testing.T) {
-	err := movieSubject.Rename(7, "英国历史_new")
+	err := movieSubject.Rename(moviesubject.RenameRequest{Id: 7, Name: "英国历史_new"})
 	if err != nil {
 		t.Error(err)
 	}
@@ -82,7 +82,8 @@ func TestResetOrder(t *testing.T) {
 }
 
 func TestItems(t *testing.T) {
-	r, err := movieSubject.ItemsWith("4026601", moviesubject.DouList, 0, 10)
+	subjectId := "4026601"
+	r, err := movieSubject.Items(moviesubject.ItemsRequest{SubjectId: &subjectId, Category: moviesubject.DouList, PageIndex: 0, PageSize: 10})
 	if err != nil {
 		t.Error(err)
 	}
