@@ -54,6 +54,15 @@ func (s *MovieSubject) Init(req InitRequest) error {
 	return nil
 }
 
+func (s *MovieSubject) List() ([]Subject, error) {
+	var subjects []Subject
+	err := s.db.Find(&subjects).Error
+	if err != nil {
+		return nil, fmt.Errorf("获取主题列表失败: %v", err)
+	}
+	return subjects, nil
+}
+
 func (s *MovieSubject) Order(req OrderRequest) error {
 	for i, id := range req.Ids {
 		err := s.db.Model(&Subject{}).Where("id = ?", id).Update("display_order", i).Error

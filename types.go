@@ -32,11 +32,11 @@ type (
 		Name string `json:"name"` // 名称
 	}
 	ItemsRequest struct {
-		Id        *int64   `json:"id,optional"`        // 主题 id
-		SubjectId *string  `json:"subjectId,optional"` // 豆列或者片单的 id，与 id 二选一
-		Category  Category `json:"category"`           // 类别
-		PageIndex int      `json:"pageIndex"`          // 页码
-		PageSize  int      `json:"pageSize"`           // 每页大小
+		Id        *int64   `form:"id,optional" json:"id,optional"`               // 主题 id
+		SubjectId *string  `form:"subjectId,optional" json:"subjectId,optional"` // 豆列或者片单的 id，与 id 二选一
+		Category  Category `form:"category" json:"category"`                     // 类别
+		PageIndex int      `form:"pageIndex" json:"pageIndex"`                   // 页码
+		PageSize  int      `form:"pageSize" json:"pageSize"`                     // 每页大小
 	}
 )
 
