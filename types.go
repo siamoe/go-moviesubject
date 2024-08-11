@@ -50,7 +50,7 @@ type (
 		Image     string           `json:"image"`
 		Overview  string           `json:"overview"`
 	}
-	ItemResult struct {
+	ItemsResult struct {
 		PageIndex int    `json:"pageIndex"`
 		PageSize  int    `json:"pageSize"`
 		Total     int    `json:"total"`

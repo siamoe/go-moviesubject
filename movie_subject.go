@@ -123,7 +123,7 @@ func (s *MovieSubject) ResetOrder() error {
 	return nil
 }
 
-func (s *MovieSubject) Items(req ItemsRequest) (result ItemResult, err error) {
+func (s *MovieSubject) Items(req ItemsRequest) (result ItemsResult, err error) {
 	if req.Id != nil {
 		return s.items(*req.Id, req.Category, req.PageIndex, req.PageSize)
 	}
@@ -133,7 +133,7 @@ func (s *MovieSubject) Items(req ItemsRequest) (result ItemResult, err error) {
 	return result, errors.New("参数错误")
 }
 
-func (s *MovieSubject) items(id int64, category Category, pageIndex int, pageSize int) (result ItemResult, err error) {
+func (s *MovieSubject) items(id int64, category Category, pageIndex int, pageSize int) (result ItemsResult, err error) {
 	var subject Subject
 	err = s.db.Model(&Subject{}).Where("id = ?", id).First(&subject).Error
 	if err != nil || !errors.Is(err, gorm.ErrRecordNotFound) {
@@ -142,7 +142,7 @@ func (s *MovieSubject) items(id int64, category Category, pageIndex int, pageSiz
 	return s.itemsWith(subject.SubjectId, category, pageIndex, pageSize)
 }
 
-func (s *MovieSubject) itemsWith(subjectId string, category Category, pageIndex int, pageSize int) (result ItemResult, err error) {
+func (s *MovieSubject) itemsWith(subjectId string, category Category, pageIndex int, pageSize int) (result ItemsResult, err error) {
 	c := douban.NewApiClient()
 	var items []Item
 	if category == DouList {
